@@ -1,0 +1,340 @@
+; Thu Mar 26 23:19:22 CET 2015
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([Practica9_Class0] of  Mayoristas
+
+	(descripci%C3%B3n "Te clavan un extra por lo de Pana y otro extra por lo de visión. Teniendo Viajes Marsans para qué quieres esto.")
+	(nombre "Panavisión")
+	(viajesOfertados [Practica9_Class20005]))
+
+([Practica9_Class10000] of  Viaje
+
+	(alojamiento [Practica9_Class40001])
+	(c%C3%B3digo "BristolTravelplanEnRango")
+	(destino [Practica9_Class50004])
+	(duraci%C3%B3n 5.0)
+	(inverse_of_viajesOfertados [Practica9_Class30003])
+	(precio 900.0)
+	(transporte [Practica9_Class30015]))
+
+([Practica9_Class10001] of  %3APAL-CONSTRAINT
+
+	(%3APAL-NAME "AE001")
+	(%3APAL-STATEMENT "(Predicate)"))
+
+([Practica9_Class10002] of  Viaje
+
+	(alojamiento [Practica9_Class30011])
+	(c%C3%B3digo "GranadaTren")
+	(destino [Practica9_Class20004])
+	(duraci%C3%B3n 12.0)
+	(inverse_of_viajesOfertados [Practica9_Class2])
+	(precio 1500.0)
+	(transporte [Practica9_Class30010]))
+
+([Practica9_Class14] of  CadenasHoteleras
+
+	(descripci%C3%B3n "Empresa nacional hostelera Meliá")
+	(hoteles
+		[Practica9_Class7]
+		[Practica9_Class30013])
+	(nombre "Meliá"))
+
+([Practica9_Class17] of  CadenasHoteleras
+
+	(descripci%C3%B3n "Empresa nacional hostelera NH")
+	(hoteles [Practica9_Class8])
+	(nombre "NH"))
+
+([Practica9_Class18] of  %3AINSTANCE-ANNOTATION
+
+	(%3ACREATION-TIMESTAMP "2015.03.13 18:26:21.971 GMT")
+	(%3ACREATOR "usuario_local"))
+
+([Practica9_Class2] of  Mayoristas
+
+	(descripci%C3%B3n "Nombre cutre donde los haya (igual que el nivel de la empresa).")
+	(nombre "Politours")
+	(viajesOfertados
+		[Practica9_Class30017]
+		[Practica9_Class10002]
+		[Practica9_Class40007]))
+
+([Practica9_Class20001] of  Hotel
+
+	(destino [Practica9_Class20006])
+	(estrellas 4)
+	(inverse_of_hoteles [Practica9_Class50009])
+	(nombre "AC Cádiz"))
+
+([Practica9_Class20004] of  Destino
+
+	(inverse_of_destino
+		[Practica9_Class30011]
+		[Practica9_Class10002])
+	(nombre "Granada")
+	(pais "España")
+	(region "Andalucía")
+	(tipoGeogr%C3%A1fico "península"))
+
+([Practica9_Class20005] of  Viaje
+
+	(alojamiento [Practica9_Class20001])
+	(c%C3%B3digo "CadizAvion")
+	(destino [Practica9_Class20006])
+	(duraci%C3%B3n 15.0)
+	(inverse_of_viajesOfertados
+		[Practica9_Class30003]
+		[Practica9_Class0])
+	(precio 150.0)
+	(transporte [Practica9_Class30005]))
+
+([Practica9_Class20006] of  Destino
+
+	(inverse_of_destino
+		[Practica9_Class30001]
+		[Practica9_Class20005])
+	(nombre "Cádiz")
+	(pais "España")
+	(region "Andalucía"))
+
+([Practica9_Class20007] of  Destino
+
+	(inverse_of_destino
+		[Practica9_Class30013]
+		[Practica9_Class30016]
+		[Practica9_Class30017]
+		[Practica9_Class20009])
+	(nombre "Madrid")
+	(pais "España")
+	(region "Madrid")
+	(tipoGeogr%C3%A1fico "península"))
+
+([Practica9_Class20008] of  Destino
+
+	(inverse_of_destino
+		[Practica9_Class30014]
+		[Practica9_Class20010])
+	(nombre "Munich")
+	(pais "Alemania")
+	(region "Nidea"))
+
+([Practica9_Class20009] of  Viaje
+
+	(alojamiento [Practica9_Class30016])
+	(c%C3%B3digo "MadridAvion")
+	(destino [Practica9_Class20007])
+	(duraci%C3%B3n 5.0)
+	(inverse_of_viajesOfertados [Practica9_Class3])
+	(precio 56.0)
+	(transporte [Practica9_Class30015]))
+
+([Practica9_Class20010] of  Viaje
+
+	(alojamiento [Practica9_Class30014])
+	(c%C3%B3digo "MunichAvion")
+	(destino [Practica9_Class20008])
+	(duraci%C3%B3n 8.0)
+	(inverse_of_viajesOfertados
+		[Practica9_Class3]
+		[Practica9_Class30003])
+	(precio 4565.0)
+	(transporte [Practica9_Class30012]))
+
+([Practica9_Class20011] of  Viaje
+
+	(alojamiento [Practica9_Class7])
+	(c%C3%B3digo "SevillaCoche")
+	(destino [Practica9_Class20012])
+	(duraci%C3%B3n 5.0)
+	(inverse_of_viajesOfertados [Practica9_Class30003])
+	(precio 800.0)
+	(transporte [Practica9_Class30008]))
+
+([Practica9_Class20012] of  Destino
+
+	(inverse_of_destino
+		[Practica9_Class7]
+		[Practica9_Class20011]
+		[Practica9_Class40007])
+	(nombre "Sevilla")
+	(pais "España")
+	(region "Andalucía"))
+
+([Practica9_Class3] of  Mayoristas
+
+	(descripci%C3%B3n "Los  de toda la vida.")
+	(nombre "ViajesMarsans")
+	(viajesOfertados
+		[Practica9_Class20010]
+		[Practica9_Class20009]
+		[Practica9_Class40004]))
+
+([Practica9_Class30001] of  Camping
+
+	(destino [Practica9_Class20006])
+	(estrellas 5)
+	(nombre "CampingCadizLujo"))
+
+([Practica9_Class30003] of  Mayoristas
+
+	(descripci%C3%B3n "Mayorista, no vende pescado.")
+	(nombre "Travelplan")
+	(viajesOfertados
+		[Practica9_Class20005]
+		[Practica9_Class20010]
+		[Practica9_Class20011]
+		[Practica9_Class10000]))
+
+([Practica9_Class30004] of  Destino
+
+	(inverse_of_destino
+		[Practica9_Class8]
+		[Practica9_Class40004])
+	(nombre "Alcafran")
+	(pais "España")
+	(region "Desconocida")
+	(tipoGeogr%C3%A1fico "isla"))
+
+([Practica9_Class30005] of  Avion
+
+	(nombre "avión1")
+	(Vip TRUE))
+
+([Practica9_Class30008] of  Coche
+
+	(nombre "coche1"))
+
+([Practica9_Class30009] of  Crucero
+
+	(nombre "crucero1"))
+
+([Practica9_Class30010] of  Tren
+
+	(nombre "tren1"))
+
+([Practica9_Class30011] of  Hotel
+
+	(destino [Practica9_Class20004])
+	(estrellas 3)
+	(inverse_of_hoteles [Practica9_Class50009])
+	(nombre "AC Granada"))
+
+([Practica9_Class30012] of  Avion
+
+	(nombre "AvionMunich1")
+	(Vip TRUE))
+
+([Practica9_Class30013] of  Hotel
+
+	(destino [Practica9_Class20007])
+	(estrellas 4)
+	(inverse_of_hoteles [Practica9_Class14])
+	(nombre "CuatroEstrellasMadrid"))
+
+([Practica9_Class30014] of  Hotel
+
+	(destino [Practica9_Class20008])
+	(estrellas 2)
+	(inverse_of_hoteles [Practica9_Class50011])
+	(nombre "HotelMunich1"))
+
+([Practica9_Class30015] of  Avion
+
+	(nombre "avionMadrid")
+	(Vip TRUE))
+
+([Practica9_Class30016] of  Hotel
+
+	(destino [Practica9_Class20007])
+	(estrellas 5)
+	(inverse_of_hoteles [Practica9_Class50010])
+	(nombre "Ritch Madrid"))
+
+([Practica9_Class30017] of  Viaje
+
+	(alojamiento [Practica9_Class30013])
+	(c%C3%B3digo "Madrid4estrellasCoche")
+	(destino [Practica9_Class20007])
+	(duraci%C3%B3n 6.0)
+	(inverse_of_viajesOfertados [Practica9_Class2])
+	(precio 254.0)
+	(transporte [Practica9_Class30008]))
+
+([Practica9_Class40001] of  Hotel
+
+	(destino [Practica9_Class50004])
+	(estrellas 5)
+	(inverse_of_hoteles [Practica9_Class50008])
+	(nombre "Marriot"))
+
+([Practica9_Class40004] of  Viaje
+
+	(alojamiento [Practica9_Class8])
+	(c%C3%B3digo "ToAlcafranNoCruceroSiIsla")
+	(destino [Practica9_Class30004])
+	(duraci%C3%B3n 20.0)
+	(inverse_of_viajesOfertados [Practica9_Class3])
+	(precio 800.0)
+	(transporte [Practica9_Class30010]))
+
+([Practica9_Class40007] of  Viaje
+
+	(alojamiento [Practica9_Class7])
+	(c%C3%B3digo "SevillaMeliaPolitours")
+	(destino [Practica9_Class20012])
+	(duraci%C3%B3n 15.0)
+	(inverse_of_viajesOfertados [Practica9_Class2])
+	(precio 452.0)
+	(transporte [Practica9_Class30008]))
+
+([Practica9_Class50004] of  Destino
+
+	(inverse_of_destino
+		[Practica9_Class40001]
+		[Practica9_Class10000])
+	(nombre "Bristol")
+	(pais "Reino Unido")
+	(region "Oeste"))
+
+([Practica9_Class50008] of  CadenasHoteleras
+
+	(descripci%C3%B3n "Empresa internacional hostelera Marriot")
+	(hoteles [Practica9_Class40001])
+	(nombre "MarriotInternational"))
+
+([Practica9_Class50009] of  CadenasHoteleras
+
+	(descripci%C3%B3n "Empresa nacional hostelera AC")
+	(hoteles
+		[Practica9_Class20001]
+		[Practica9_Class30011])
+	(nombre "AC"))
+
+([Practica9_Class50010] of  CadenasHoteleras
+
+	(descripci%C3%B3n "Empresa hostelera Ritch")
+	(hoteles [Practica9_Class30016])
+	(nombre "Ritch"))
+
+([Practica9_Class50011] of  CadenasHoteleras
+
+	(descripci%C3%B3n "Empresa alemana hostelera GermanHotels")
+	(hoteles [Practica9_Class30014])
+	(nombre "GermanHotels"))
+
+([Practica9_Class7] of  Hotel
+
+	(destino [Practica9_Class20012])
+	(estrellas 3)
+	(inverse_of_hoteles [Practica9_Class14])
+	(nombre "Meliá Sevilla"))
+
+([Practica9_Class8] of  Hotel
+
+	(destino [Practica9_Class30004])
+	(estrellas 4)
+	(inverse_of_hoteles [Practica9_Class17])
+	(nombre "NH Alcafrán"))

@@ -1,0 +1,82 @@
+\documentclass[11pt, a4paper, spanish, openright, twoside]{book}
+\usepackage[spanish, activeacute]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[top=2.5cm, bottom=2.5cm, outer=1.75cm, inner=1.75cm, heightrounded, marginparwidth=2.5cm, marginparsep=0.3cm]{geometry}	%márgenes empequeñecidos
+\usepackage[top=2.95cm, bottom=2.25cm, outer=2.75cm, inner=2.75cm, heightrounded, marginparwidth=2.5cm, marginparsep=0.3cm]{geometry}	%márgenes originalmente
+
+
+\begin{document}
+
+
+	\begin{section}{Introducción}
+		Jess:
+
+
+			Vamos a separar el motor de inferencia ( que nos lo dan hecho) de las reglas(conocimiento) y vamos a construir 					nuestra base de reglas usando la sintaxis de Jess.
+
+			deffacts: añadir los hechos iniciales. Se cargan cuando se inicializa el sistema.
+			asserst: añadir hechos durante la ejecución.
+			
+			
+				
+					Cliente
+				
+			Nombre
+			edad
+			
+			Museos
+			Playa
+			Viaje:
+			presupuesto
+			nº personas . amigos, familia niños
+			descanso
+			dias
+			
+			
+				Destinos: Deben poder obtenerse a partir de bases de datos
+				
+			Ibiza:
+				500 hoteles
+				1000 apartaoteles
+				50 discotecas
+				1 teatro
+				10 centros comerciales
+				ESPAÑA
+				compras
+				ocio nocturno
+				
+				
+				Clasificacion de Destinos:
+					compras-> nº centros comerciales >5
+					ocio nocturno-> nº discotecas > 10
+					gastronomia -> nº restaurante > 50
+					nacional -> pais = ESPAÑA
+				
+				Clasificacion de clientes:
+					jovenes-> edad < 30
+					medio-> edad > 30 y edad < 65
+					mayores-> edad > 65
+					aventura->no hay por qué preguntarle al usuario
+					fiesta-> joven y aventura -> fiesta (por ejeplo)
+					
+				Alojamiento >
+					camping -> aventura, joven y barato
+					hotel
+					
+				
+					
+		Debo asociar a un cliente con un destino, un alojamiento y un transporte.
+		
+			
+				Prototipo 0:
+					Campo: sí o no (podemos tener el campo vacío)
+					Ópera: sí o no.
+					Naturaleza sí.
+					Primero usar ENUM y luego pasar a MULTISLOT.
+		
+		puedo asertar:(tipo pepe aventura) 
+		rellenar un campo de la plantilla cuando lo conozca
+				
+	\end{section}
+
+\end{document}

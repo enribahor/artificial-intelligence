@@ -1,0 +1,208 @@
+\documentclass[11pt, a4paper, spanish, openright, twoside]{book}
+\usepackage[spanish, activeacute]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[top=2.5cm, bottom=2.5cm, outer=1.75cm, inner=1.75cm, heightrounded, marginparwidth=2.5cm, marginparsep=0.3cm]{geometry}	%márgenes empequeñecidos
+\usepackage[top=2.95cm, bottom=2.25cm, outer=2.75cm, inner=2.75cm, heightrounded, marginparwidth=2.5cm, marginparsep=0.3cm]{geometry}	%márgenes originalmente
+\usepackage{dpg}
+\usepackage{fli}
+
+\usepackage{pgf}
+\usepackage{tikz}
+
+\usepgflibrary{shapes.geometric} % LATEX and plain TEX and pure pgf
+\usetikzlibrary{arrows,automata,positioning}
+\tikzstyle{accepting by double}= [double distance=1.6pt,double,outer sep=.5\pgflinewidth+.8pt] % esto es algo estético.
+\renewcommand\shorthandsspanish{}  % para compatibilizar spanish con tikz
+
+%%%%%%		Figuras		%%%%%%%%%%%%%%%%%%%
+\usepackage[vflt]{floatflt}		%Entorno float-figure
+
+%%%%%%		Page style		%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thepage}{\arabic{page}}% Arabic page numbers\fancyhead{}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead[LO,RE]{Práctica 6}	%encabezado de pares: nombre de la sección
+\fancyhead[RO,LE]{Diseño de un agente de viajes}
+\fancyfoot[LE,RO]{\thepage}	%abajo a izqda en pares, derecha en impares: numero de pagina
+%\fancyhead[LE]{\nouppercase{\leftmark}} %cuadro izquierdo de pagina par: parte y contador
+\fancyfoot[CE]{Inteligencia Artificial} 
+\fancyfoot[CO]{Doble Grado Informática-Matemáticas - Universidad Complutense}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0.4pt}		% linea por debajo del encabezado
+\renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}	%negrita
+\renewcommand{\labelitemi}{$\circ$} %Primer itemize con circunferencia vacia
+\renewcommand{\labelitemii}{$\cdot$} %Segundo itemize con punto pequeño \cdot
+\renewcommand*{\thesection}{\arabic{section}}	% Hace que no apareca el indice de capitulos y que comience en section
+
+%%%%%%		Others		%%%%%%%%%%%%%%%%%%%
+\setlength{\leftmarginii}{0em} %Segundo itemize sin sangria
+\setlength{\leftmarginiii}{1em} %Tercer itemize casi sin sangria
+\renewcommand{\labelitemiii}{ }
+\pagenumbering{roman}
+\addto{\captionsspanish}{\renewcommand*{\contentsname}{Índice}} %Cambia "Indice general" por "Indice"
+
+
+
+\begin{document} 
+
+\title{\Huge{\textsc{Inteligencia Artificial}} \\
+	\vspace{0.7cm}
+	 \textsc{\Large{Práctica 6}} \\
+	\vspace{1.5cm}
+	\includegraphics[scale=0.45]{viaje}}
+\author{\textsc{Grupo 3:}\\
+	Enrique Ballesteros Horcajo\\
+	Ignacio Iker Prado Rujas}
+\date{\Today}
+\maketitle
+
+\newpage
+\mbox{}
+\thispagestyle{empty}						% Hoja en blanco, sin numeros ni nada
+\newpage
+
+
+\tableofcontents 							%INDICE hipervinculado
+
+\newpage
+\mbox{}
+\thispagestyle{empty}						% Hoja en blanco, sin numeros ni nada
+\newpage
+
+\pagenumbering{arabic}						% Pone el contador de paginas a 1 y ahora en numeros normales
+
+\vspace{3cm}
+
+
+\newpage
+
+
+
+\begin{section}{Descripción del prototipo}
+	\begin{subsection}{Descripción del funcionamiento}
+	
+	En este primer prototipo pretendemos recomendar paquetes de viaje de manera sencilla relacionando los intereses de una persona con las características de cada ciudad. Los viajes serán de una sola persona, y se podrán realizar en bus, coche o tren.
+Por ahora recomendará los transportes y alojamientos que mejor se ajusten al presupuesto del cliente, y varias ciudades que cumplen los requisitos que se infieran de sus características.
+
+Para indicar el transporte y el alojamiento por ahora no se tendrá en cuenta el diferente coste que puedan tener dependiendo de 
+la ciudad. Se dedicará un cuarto del presupuesto del viaje al transporte y un cuarto al alojamiento. La otra mitad será el gasto que podrá realizar el cliente en su estancia. 
+
+Se inferirán los gustos del cliente a partir de sus datos objetivos, teniendo en cuenta los intereses que él mismo apunte.
+
+La información de las ciudades se inferirá a partir de unos parámetros concretos que es posible obtener objetivamente 
+de nuestra base de conocimiento.
+	\end{subsection}
+	
+	\begin{subsection}{Conocimiento utilizado}
+		Principalmente hemos usado información exacta del número de habitantes y del número de hoteles, datos más sencillos de obtener. El resto de la información está estimada a partir de páginas de ocio y del número de habitantes. También se aporta conocimiento propio de las ciudades.
+
+	\end{subsection}
+	
+	\begin{subsection}{Estructura modular}
+	La estructura modular nos va a permitir explicar también el funcionamiento. Tenemos primero los datos iniciales y las estructuras en el módulo inicial (main). A partir de aquí podemos distinguir tres partes importantes: las reglas que infieren datos sobre el usuario, las reglas que obtienen datos de cada ciudad, y las reglas que determinan el paquete indicado para el usuario a partir de los datos inferidos.
+	
+	El primer módulo (usuario), nos calcula el rango de edad en el que se mueve, el presupuesto diario con el que va a contar, e infiere los intereses que tiene el usuario pero que no ha escrito.
+	
+	El segundo módulo (ciudad), obtiene las características de cada ciudad a partir de los datos iniciales obtenidos de nuestra base del conocimiento.
+	
+	El tercer módulo se divide en tres:
+	\begin{itemize}
+		\item Destino: Recomienda el destino para el usuario. Por ahora pueden ser varios para un mismo usuario.
+		\item Transporte: Recomienda un medio de transporte adecuado al presupuesto del cliente.
+		\item Alojamiento: Infiere del presupuesto y el número de días de estancia el alojamiento adecuado.
+	\end{itemize}
+	
+	\end{subsection}
+\end{section}
+	\newpage
+	\begin{section}{Ejecución del prototipo}
+	
+	El prototipo vamos a ejecutarlo para tres personas. Una persona joven que está interesada en la aventura, tiene un 
+	presupuesto bajo y quiere irse de viaje un fin de semana. Una persona de edad media interesada en el turismo, que quiere 
+	hacer un viaje de una semana. Y una persona anciana que quiere hacer un viaje de dos días con un gran presupuesto 
+	pero que no tiene ningún interés en concreto:
+		\begin{itemize}
+			\item (persona (nombre juan)(edad 18)(presupuesto 150)(intereses aventura)(dias 3))
+			\item  (persona (nombre maria)(edad 50)(presupuesto 800)(intereses turismo)(dias 7))
+			\item  (persona (nombre pepe)(edad 65)(presupuesto 500)(dias 2))
+	\end{itemize}
+			
+	Tendremos tres ciudades que van a poder ser recomendadas. Segovia, un destino de interés gastronómico y de aventura. 			Valencia, un destino de playa y aventura. Barcelona, una ciudad turística pero con lugar para el relax. Sin embargo, ninguna 			de estas características se incluye inicialmente, sino  que las obtendremos a partir de sus datos objetivos.
+	
+		\begin{itemize}
+			\item     (ciudad (nombre segovia)(habitantes 55000)(hoteles 28)
+        (montanya si) (playa no)(centrosComerciales 2)
+        (discotecas 5) (monumentos 7)(balnearios 3)(restaurantes 25))
+			\item (ciudad (nombre valencia)(habitantes 800000)(hoteles 1200)
+        (montanya no) (playa si) (discotecas 7)  (monumentos 30)
+        (restaurantes 300))
+			\item  
+	(ciudad (nombre barcelona)(habitantes 1600000)(hoteles 2260)
+        (montanya no) (playa si)(atracciones 4) (centrosComerciales 50)
+    (teatros 10) (museos 50) (operas 5)(deportes aventura)(discotecas 30) (monumentos 120) (restaurantes 600)))
+	\end{itemize}
+ 
+ 
+ 	Los intereses inferidos de cada persona nos quedan:
+ 		\begin{itemize}
+			\item Juan: aventura, fiesta y ocio.
+			\item María: turismo.
+			\item Pepe: relax.
+	\end{itemize}
+ 	
+ 	Y las características de cada destino:
+ 	\begin{itemize}
+			\item Segovia: naturaleza, relax, gastronomia y aventura.
+			\item Valencia: aventura, gastronomia y turismo.
+			\item Barcelona: turismo, fiesta, cultura, aventura, gastronomia y ocio.
+	\end{itemize}
+ 	
+	Así, nos quedan las recomendaciones:
+	
+		\begin{itemize}
+			\item destino (nombre pepe) (ciudad segovia) (alojamiento hotel) (transporte tren))
+			 \item destino (nombre maria) (ciudad barcelona) (alojamiento apartamento) (transporte tren))							 \item destino (nombre maria) (ciudad valencia) (alojamiento apartamento) (transporte tren))
+			\item destino (nombre juan) (ciudad barcelona) (alojamiento camping) (transporte bus))			
+			\item destino (nombre juan) (ciudad valencia) (alojamiento camping) (transporte bus))
+			\item destino (nombre juan) (ciudad segovia) (alojamiento camping) (transporte bus))
+	
+	\end{itemize}
+	
+		A pepe le recomienda Segovia, una ciudad para relajarse y comer bien. Esto se debe a su edad y al número de balnearios y restaurantes de Segovia. Además, debido al elevado presupuesto del que dispone le recomienda un hotel y viajar en el ave.
+		
+		Para María, le recomienda tanto Valencia como Barcelona, debido a lo turísticas que son estas ciudades. Aquí encontramos uno de los límites de nuestro programa. Segovia a pesar de contar con pocos monumentos, estos son de gran valor y por ello es una ciudad turística. Sin embargo, debido al análisis cuantitativo no obtenemos el resultado querido. Como cuenta con un presupuesto general alto le recomienda un tren, pero al irse una semana le aconseja mejor un apartamento, más económico que un hotel.
+		
+		A Juan le recomienda ir en bus y alojarse en un camping, pues su presupuesto es muy limitado. Sin embargo, al ser muy joven y buscar aventura le ofrece los tres destinos. En futuras versiones, deberá escoger Barcelona por ajustarse más a lo requerido al ser un destino de fiesta.
+		
+		
+		
+		
+
+	\end{section}
+	
+	\begin{section}{Fuentes de conocimiento}
+		\begin{itemize}
+			\item Hoteles: www.tripadvisor.com, www.viajeselcorteingles.es y www.booking.com
+			\item Habitantes: www.wikipedia.es
+			\item Tipo de ciudad: www.spain.info 
+	\end{itemize}
+		
+
+	\end{section}
+
+	
+\begin{thebibliography}{9}
+
+\bibitem{aima}
+	Russell, S.; Norvig, P, \\
+	\emph{Artificial Intelligence, a modern aproach}.\\
+	New Jersey: Pearson, 2010.
+	
+\bibitem{clase}
+	Apuntes y transparencias de Inteligencia Artificial, \\
+	Doble Grado Matemáticas - Ing. Informática, U.C.M., 2014-2015.
+
+\end{thebibliography}
+
+
+\end{document}

@@ -1,0 +1,62 @@
+
+
+	Notas del día 20-11-2014
+
+	Problemas de mapas.
+
+	Debemos meter la lista de ciudades que vamos a usar(no hacen falta todas)
+
+	Además, las aristas que son bidireccionales. Longitud de la carretera.
+	
+	Para cada ciudad, tenemos sus coordenadas relativas a una de las ciudades.
+
+	Coordenadas UTM respecto a Madrid. La heurística ya está implementada.
+
+	Necesitamos obtener las coordenadas UTM de las ciudades que vamos a usar: 
+	aplicación "Pixelis", pulsando sobre un marcador nos da las cooredenada del punto.
+	Nos las da en metros, pero vamos a trabajar en kilómetros sin decimales
+	(Podemos redondear).
+
+	Cogemos las coordenadas de Toledo, le restamos las de Madrid y así obtenemos las 
+	coordenadas relativas. Esto para todas las ciudades.
+
+	Carreteras: usamos google maps y el "cómo llegar a". Elegimos una carretera y 
+	redondeamos. No deben pasar por nodos intemedios.
+
+	Con estos datos creamos un mapa. Construimos la clase mapa simplificado de España.
+	Lo añadimos a los mapas que hay (el de Australia) o lo sustituímos.
+	
+	No hay que cambiar nada en el algoritmo.
+
+	Parte2:
+
+	Siete-ocho líneas por punto.
+	
+	Podemos leer el tráfico en tiempo real: lento, medio y rápido.
+
+	Queremos seleccionar la mejor ruta en tiempo.(Opcional implementar)
+
+	Mapa ciudad: qué mejoras introducirías, qué cambirías [pej. direcciones en las calles](no implementar)
+
+	Ciudades:
+
+		+Madrid(440, 4475)	->	(0, 0)
+
+		+Toledo(410, 4415)	->	(-30, -60)
+		+Guadalajara(485, 4500)	->	(45, 25)
+		+Cuenca(570,  4435)	->	(130, -40)
+		+Albacete(600, 4315)	->	(160, -160)
+		+Ciudad Real (420, 4315)->	(-20, -160)
+
+		+Soria(540, 4625)	->	(100, 150)
+		+Palencia(370, 4650)  	->	(-70, 175)
+		+Segovia(405, 4535)	->	(-35, 60)
+		+Valladolid(355, 4610)	->	(-85, 135)
+		+Salamanca(275, 4540)	->	(-165, 65)
+		+Burgos(440, 4690)	->	(0, 215)
+		+Zamora(270, 4600)	->	(-170, 125)
+		+Ávila(355, 4500)	->	(-85, 25)
+		+Tomelloso(500, 4330)  	->	(60, -145)
+		
+		+Cáceres(725, 4370)	->	(285, -105)	
+		+Barcelona(430, 4580)	->	(-10, 105)

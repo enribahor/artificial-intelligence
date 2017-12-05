@@ -1,0 +1,135 @@
+
+%%% PACKAGE	%%%
+
+\usepackage{pgf}
+\usepackage{wasysym}	% Para poner el símbolo de absurdo (rayo)
+\usepackage{tikz}
+
+\usetikzlibrary{arrows,automata,matrix,positioning,shapes,shapes.geometric}
+\usepackage[utf8]{inputenc}
+
+
+\tikzstyle{accepting by double}= [double distance=1.6pt,double,outer sep=.5\pgflinewidth+.8pt] % esto es algo estético.
+\renewcommand\shorthandsspanish{}  % para compatibilizar spanish con tikz
+
+
+
+%%% SOME COMMANDS	%%%
+
+%%%%%%% Para el algoritmo de llenado de tabla %%%%%%%%%%%%
+
+\newcommand{\nnn}{|[draw=black,fill=white,text=black]|$\circ$}	% Pone celda con X_{#1}
+\newcommand{\nne}[1]{|[draw=black,fill=white,text=black]|$X_{#1}$}	% Pone celda con X_{#1}
+\newcommand{\ssn}{|[draw=red,thick,fill=purple,opacity=0.7,text=white]|$\bullet$}	% Pone celda indistinguibles
+
+\newcommand{\tq}{ \mid }						% tal que
+
+%%%%%%% Une dos estados con una flecha. Parámetros {estado 1}{estado 2} {transición} {distancia entre nodos}
+\newcommand\flecha[4]{	
+	\begin{tikzpicture}[shorten >=1pt,node distance=#4cm,on grid,auto,initial text=,semithick]
+		\tikzset{every loop/.style={min distance=2mm,in=70,out=110,looseness=7}}
+		\tikzstyle{every state}=[fill=blue!15,very thick, draw=blue,text=blue]
+		
+		 \node[state]  	(qi)				{#1};
+		 \node[state]  	(qj)	[right=of qi]	{#2};
+		 \path[->] 
+		        (qi)	edge	node		{#3}	(qj);
+	\end{tikzpicture}
+}
+
+%%%%%%% Une dos estados inicial y final con una flecha. Parámetros {estado inicial}{estado final} {transición} {distancia entre nodos}
+\newcommand\flechainifin[4]{	
+	\begin{tikzpicture}[shorten >=1pt,node distance=#4cm,on grid,auto,initial text=start,semithick]
+		\tikzset{every loop/.style={min distance=2mm,in=70,out=110,looseness=7}}
+		\tikzstyle{every state}=[fill=blue!15,very thick, draw=blue,text=blue]
+		
+		 \node[state, initial]	  	(qi)				{#1};
+		 \node[state, accepting]  	(qj)	[right=of qi]	{#2};
+		 \path[->] 
+		        (qi)	edge	node		{#3}	(qj);
+	\end{tikzpicture}
+}
+
+%%%%%% Tres estados en triángulo con transiciones sin base
+%%%%%% Parámetros: {vért. sup} {vért. izq} {vért. der} {transición 1} {transición 2}
+\newcommand\triang[5]{
+	\begin{tikzpicture}[shorten >=1pt,node distance=1cm and 2cm,on grid,auto,initial text=,bend angle=20,semithick]
+		\tikzset{every loop/.style={min distance=2mm,in=70,out=110,looseness=7}}
+		\tikzstyle{every state}=[fill=blue!15,very thick, draw=blue,text=blue]
+		\node[state, fill=red!15, draw=red,text=red]	(qk)          		 	{#1};
+		\node[state]	(qi) [below left=of qk]	{#2};
+		\node[state]	(qj) [below right=of qk]	{#3};
+		\path[->] 
+		        (qi) edge [bend left]		node {#4} (qk)
+		        (qk) edge [bend left]		node {#5} (qj);
+	\end{tikzpicture}
+}
+
+%%%%%% Tres estados en triángulo con loop transiciones sin base
+%%%%%% Parámetros: {vért. sup} {vért. izq} {vért. der} {transición 1} {transición 2} {loop}
+\newcommand\triangloop[6]{
+	\begin{tikzpicture}[shorten >=1pt,node distance=1cm and 2cm,on grid,auto,initial text=,bend angle=20,semithick]
+		\tikzset{every loop/.style={min distance=2mm,in=70,out=110,looseness=7}}
+		\tikzstyle{every state}=[fill=blue!15,very thick, draw=blue,text=blue]
+		\node [state, fill=red!15, draw=red,text=red]	(qk)          		 	{#1};
+		\node [state]							(qi) [below left=of qk]	{#2};
+		\node[state]							(qj) [below right=of qk]	{#3};
+		\path[->] 
+		        (qi) edge [bend left]		node {#4} (qk)
+		        (qk) edge [bend left]		node {#5} (qj)
+		             edge [loop above]	node	 {#6} ();
+	\end{tikzpicture}
+}
+
+%%%%%% Tres estados en triángulo con loop y transiciones con base.
+%%%%%% Parámetros: {vért. sup} {vért. izq} {vért. der} {transición 1} {transición 2} {transición base}
+\newcommand\triangbase[6]{
+	\begin{tikzpicture}[shorten >=1pt,node distance=1cm and 2cm,on grid,auto,initial text=,bend angle=20,semithick]
+		\tikzset{every loop/.style={min distance=2mm,in=70,out=110,looseness=7}}
+		\tikzstyle{every state}=[fill=blue!15,very thick, draw=blue,text=blue]		
+		
+		\node [state, fill=red!15, draw=red,text=red]	(qk)          		 	{#1};
+		\node[state]							(qi) [below left=of qk]	{#2};
+		\node[state]							(qj) [below right=of qk]	{#3};
+		\path[->] 
+			(qi)	edge [bend left] 		node {#4} (qk)
+				edge [bend right,swap] 	node {#6} (qj)
+			(qk)	edge [bend left]		node {#5} (qj);
+\end{tikzpicture}
+}
+
+%%%%%% Tres estados en triángulo con loop y transiciones con base.
+%%%%%% Parámetros: {vért. sup} {vért. izq} {vért. der} {transición 1} {transición 2} {transición base} {loop}
+\newcommand\triangbaseloop[7]{
+	\begin{tikzpicture}[shorten >=1pt,node distance=1cm and 2cm,on grid,auto,initial text=,bend angle=20,semithick]
+		\tikzset{every loop/.style={min distance=2mm,in=70,out=110,looseness=7}}
+		\tikzstyle{every state}=[fill=blue!15,very thick, draw=blue,text=blue]
+		
+		\node [state, fill=red!15, draw=red,text=red]	(qk)          		 	{#1};
+		\node[state]							(qi) [below left=of qk]	{#2};
+		\node[state]							(qj) [below right=of qk]	{#3};
+		\path[->] 
+			(qi)	edge [bend left] 		node {#4} (qk)
+				edge [bend right,swap] 	node {#6} (qj)
+			(qk)	edge [bend left]		node {#5} (qj)
+				edge [loop above]		node {#7} ();
+\end{tikzpicture}
+}
+
+
+
+%%% OPERADORES MATEMATICOS %%%
+
+
+
+
+
+%%%  MATH COMMANDS  %%%
+
+
+
+
+
+
+%%%			%%%
+

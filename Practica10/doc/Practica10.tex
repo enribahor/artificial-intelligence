@@ -1,0 +1,119 @@
+\documentclass[11pt, a4paper, spanish, openright, twoside]{book}
+\usepackage[spanish, activeacute]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[top=2.5cm, bottom=2.5cm, outer=1.75cm, inner=1.75cm, heightrounded, marginparwidth=2.5cm, marginparsep=0.3cm]{geometry}	%márgenes empequeñecidos
+\usepackage[top=2.95cm, bottom=2.25cm, outer=2.75cm, inner=2.75cm, heightrounded, marginparwidth=2.5cm, marginparsep=0.3cm]{geometry}	%márgenes originalmente
+\usepackage{dpg}
+\usepackage{fli}
+
+\usepackage{pgf}
+\usepackage{tikz}
+
+\usepgflibrary{shapes.geometric} % LATEX and plain TEX and pure pgf
+\usetikzlibrary{arrows,automata,positioning}
+\tikzstyle{accepting by double}= [double distance=1.6pt,double,outer sep=.5\pgflinewidth+.8pt] % esto es algo estético.
+\renewcommand\shorthandsspanish{}  % para compatibilizar spanish con tikz
+
+%%%%%%		Figuras		%%%%%%%%%%%%%%%%%%%
+\usepackage[vflt]{floatflt}		%Entorno float-figure
+
+%%%%%%		Page style		%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thepage}{\arabic{page}}% Arabic page numbers\fancyhead{}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead[LO,RE]{Práctica 10}	%encabezado de pares: nombre de la sección
+\fancyhead[RO,LE]{Protégé con Jess}
+\fancyfoot[LE,RO]{\thepage}	%abajo a izqda en pares, derecha en impares: numero de pagina
+%\fancyhead[LE]{\nouppercase{\leftmark}} %cuadro izquierdo de pagina par: parte y contador
+\fancyfoot[CE]{Inteligencia Artificial} 
+\fancyfoot[CO]{Doble Grado Informática-Matemáticas - Universidad Complutense}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0.4pt}		% linea por debajo del encabezado
+\renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}	%negrita
+\renewcommand{\labelitemi}{$\circ$} %Primer itemize con circunferencia vacia
+\renewcommand{\labelitemii}{$\cdot$} %Segundo itemize con punto pequeño \cdot
+\renewcommand*{\thesection}{\arabic{section}}	% Hace que no apareca el indice de capitulos y que comience en section
+
+%%%%%%		Others		%%%%%%%%%%%%%%%%%%%
+\setlength{\leftmarginii}{0em} %Segundo itemize sin sangria
+\setlength{\leftmarginiii}{1em} %Tercer itemize casi sin sangria
+\renewcommand{\labelitemiii}{ }
+\pagenumbering{roman}
+\addto{\captionsspanish}{\renewcommand*{\contentsname}{Índice}} %Cambia "Indice general" por "Indice"
+
+
+
+\begin{document} 
+\title{\Huge{\textsc{Inteligencia Artificial}} \\
+	\vspace{0.7cm}
+	 \textsc{\Large{Práctica 10}} \\
+	\vspace{1.5cm}
+	\includegraphics[scale=0.45]{viaje}
+	\includegraphics[scale=0.55]{protege}
+	}
+\author{\textsc{Grupo 3:}\\
+	Enrique Ballesteros Horcajo\\
+	Ignacio Iker Prado Rujas}
+\date{\Today}
+\maketitle
+
+\newpage
+\mbox{}
+\thispagestyle{empty}						% Hoja en blanco, sin numeros ni nada
+\newpage
+
+
+\tableofcontents 							%INDICE hipervinculado
+
+\newpage
+\mbox{}
+\thispagestyle{empty}						% Hoja en blanco, sin numeros ni nada
+\newpage
+
+\pagenumbering{arabic}						% Pone el contador de paginas a 1 y ahora en numeros normales
+
+\vspace{3cm}
+
+
+\newpage
+
+\begin{section}{Descripción de la ontología desarrollada.}
+	La ontología se basa en la práctica anterior desarrollada en Protégé. Se han añadido slots que no existían y que eran necesarios para Jess. Cada usuario tendrá una recomendación de viajes que puede 
+	realizar, que le indicarán tanto el destino como el transporte y el alojamiento. Se mantienen los mayoristas que ofrecen viajes y las compañías hoteleras, aunque en la práctica no tienen gran uso.
+	
+\end{section}
+
+\begin{section}{Programa Jess.}
+	El programa en Jess automatiza el cálculo del presupuesto para los viajes basándose en el número de días y el coste del transporte y alojamiento. Además realiza el matching para recomendar al 
+	usuario los viajes que puede realizar con su presupuesto y que debería hacer de acuerdo a sus gustos.
+	 
+\end{section}
+
+\begin{section}{Objetivos pretendidos mediante la integración de Jess y Protégé.}
+	Al integrar Jess y Protégé intentamos que ciertas partes de la ontología se rellenen de manera automática, permitiendo así la gestión de grandes datos de manera automática y personalizada para cada usuario. 
+	Utilizando Protégé pretendemos que la organización de la información sea más intuitiva y que ciertos aspectos como la herencia sean más sencillos de gestionar. Jess gestiona ciertos aspectos automatizables que 
+	dependen de diferentes clases, y el matching que rellena las recomendaciones en cada caso.
+\end{section}
+
+\begin{section}{Resultados obtenidos.}
+	A pesar de las dificultades para trabajar en paralelo con Jess y Protégé, una vez resueltos los problemas los resultados son los esperados, obtenemos una lista de viajes recomendados para cada usuario, 
+	y al obtenerla en Protégé podemos visualizar todas las características de cada viaje recomendado, y por supuesto del destino, transporte y alojamientos del mismo viaje. Mejora mucho la experiencia así respecto 
+	a usar solamente Jess.
+\end{section}
+
+	
+\begin{thebibliography}{9}
+
+\bibitem{aima}
+	Russell, S.; Norvig, P, \\
+	\emph{Artificial Intelligence, a modern aproach}.\\
+	New Jersey: Pearson, 2010.
+	
+\bibitem{clase}
+	Apuntes y transparencias de Inteligencia Artificial, \\
+	Doble Grado Matemáticas - Ing. Informática, U.C.M., 2014-2015.
+
+\end{thebibliography}
+
+
+\end{document}

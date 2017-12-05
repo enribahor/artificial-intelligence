@@ -1,0 +1,562 @@
+; Mon Apr 27 01:28:09 CEST 2015
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
+(defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
+	(is-a USER)
+	(role abstract)
+	(single-slot pais
+;+		(comment "Indica el pais del destino")
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot intereses
+;+		(comment "Intereses del usuario")
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot tipoTransporte
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot Vip
+;+		(comment "Indica si existe clase Business")
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default FALSE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot precio
+;+		(comment "Coste que tiene el servicio")
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot alojamiento
+;+		(comment "Indica el alojamiento")
+		(type INSTANCE)
+;+		(allowed-classes Alojamiento)
+;+		(cardinality 0 1)
+;+		(inverse-slot alojamientos)
+		(create-accessor read-write))
+	(single-slot duracion
+;+		(comment "Duración del viaje en días")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tipoGeografico
+;+		(comment "Indica el tipo geográfico del destino.\nPuede ser una isla, continente, una península, etc")
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot descripci%C3%B3n
+;+		(comment "Breve descripción.")
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ADEFINITION-NAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot viajesOfertados
+		(type INSTANCE)
+;+		(allowed-classes)
+;+		(inverse-slot inverse_of_viajesOfertados)
+		(create-accessor read-write))
+	(single-slot transporte
+;+		(comment "Transporte para el viaje, en principio solo se permite uno.")
+		(type INSTANCE)
+;+		(allowed-classes Transporte)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot region
+;+		(comment "Indica la region del destino")
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3AKB-SAVE
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default FALSE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot inverse_of_viajesOfertados
+		(type INSTANCE)
+;+		(allowed-classes Mayoristas)
+;+		(inverse-slot viajesOfertados)
+		(create-accessor read-write))
+	(single-slot precio_por_dia
+;+		(comment "Precio por estancia de un día a pensión completa")
+		(type INTEGER)
+		(range 0 %3FVARIABLE)
+		(default 0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot inverse_of_destino
+		(type INSTANCE)
+;+		(allowed-classes Viaje Alojamiento Transporte)
+;+		(inverse-slot destino)
+		(create-accessor read-write))
+	(single-slot presupuesto
+		(type FLOAT)
+		(range 0.0 %3FVARIABLE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot destino
+;+		(comment "Destino del viaje, en principio solo uno por viaje.")
+		(type INSTANCE)
+;+		(allowed-classes Destino)
+;+		(cardinality 0 1)
+;+		(inverse-slot inverse_of_destino)
+		(create-accessor read-write))
+	(single-slot %3ASTARTUP-FILE
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot inverse_of_hoteles
+		(type INSTANCE)
+;+		(allowed-classes CadenasHoteleras)
+;+		(cardinality 0 1)
+;+		(inverse-slot hoteles)
+		(create-accessor read-write))
+	(single-slot %3ASTARTUP-EXPRESSION
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot codigo
+;+		(comment "Ciertas instancias requieres ser identificadas de manera única por un código.")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot hoteles
+		(type INSTANCE)
+;+		(allowed-classes Hotel)
+;+		(inverse-slot inverse_of_hoteles)
+		(create-accessor read-write))
+	(single-slot dias
+		(type INTEGER)
+		(range 1 %3FVARIABLE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ADEFINITION
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tipoAlojamiento
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot viajes
+		(type INSTANCE)
+;+		(allowed-classes Viaje)
+		(create-accessor read-write))
+	(multislot alojamientos
+		(type INSTANCE)
+;+		(allowed-classes Hotel Camping)
+;+		(inverse-slot alojamiento)
+		(create-accessor read-write))
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot caracteristicas
+;+		(comment "Características del destino, como ser de aventura, de fiesta, etc.")
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot edad
+;+		(comment "Edad del usuario.")
+		(type INTEGER)
+		(range 0 %3FVARIABLE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot estrellas
+		(type INTEGER)
+		(range 1 6)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass %3AJESS-ENGINE
+	(is-a %3ASYSTEM-CLASS)
+	(role concrete)
+	(single-slot %3ASTARTUP-FILE
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ASTARTUP-EXPRESSION
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass %3AJESS-DEFINITION
+	(is-a %3ASYSTEM-CLASS)
+	(role abstract)
+	(single-slot %3ADEFINITION-NAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3AKB-SAVE
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default FALSE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ADEFINITION
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass %3AJESS-DEFGLOBAL
+	(is-a %3AJESS-DEFINITION)
+	(role concrete))
+
+(defclass %3AJESS-DEFTEMPLATE
+	(is-a %3AJESS-DEFINITION)
+	(role concrete)
+	(multislot %3ADOCUMENTATION
+		(type STRING)
+		(create-accessor read-write)))
+
+(defclass %3AJESS-DEFFACTS
+	(is-a %3AJESS-DEFINITION)
+	(role concrete)
+	(multislot %3ADOCUMENTATION
+		(type STRING)
+		(create-accessor read-write)))
+
+(defclass %3AJESS-DEFMESSAGE-HANDLER
+	(is-a %3AJESS-DEFINITION)
+	(role concrete)
+	(multislot %3ADOCUMENTATION
+		(type STRING)
+		(create-accessor read-write)))
+
+(defclass %3AJESS-DEFMETHOD
+	(is-a %3AJESS-DEFINITION)
+	(role concrete)
+	(multislot %3ADOCUMENTATION
+		(type STRING)
+		(create-accessor read-write)))
+
+(defclass %3ARULE
+	(is-a %3ASYSTEM-CLASS)
+	(role abstract)
+	(single-slot %3ADEFINITION-NAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ADEFINITION
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass %3AJESS-RULE
+	(is-a %3AJESS-DEFINITION %3ARULE)
+	(role concrete)
+	(multislot %3ADOCUMENTATION
+		(type STRING)
+		(create-accessor read-write)))
+
+(defclass %3AFUNCTION
+	(is-a %3ASYSTEM-CLASS)
+	(role abstract)
+	(single-slot %3ADEFINITION-NAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ADEFINITION
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass %3AJESS-FUNCTION
+	(is-a %3AFUNCTION %3AJESS-DEFINITION)
+	(role concrete)
+	(multislot %3ADOCUMENTATION
+		(type STRING)
+		(create-accessor read-write)))
+
+(defclass Base
+	(is-a USER)
+	(role abstract))
+
+(defclass CadenasHoteleras "Cadenas hoteleras, cuentan con distintos hoteles por el mundo."
+	(is-a Base)
+	(role concrete)
+	(single-slot descripci%C3%B3n
+;+		(comment "Breve descripción.")
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot hoteles
+		(type INSTANCE)
+;+		(allowed-classes Hotel)
+		(create-accessor read-write))
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Mayoristas "Grandes gestoras de viajes. Suelen estafarte varios leuros por montarte el viaje pero te ahorras el marrón."
+	(is-a Base)
+	(role concrete)
+	(single-slot descripci%C3%B3n
+;+		(comment "Breve descripción.")
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot viajesOfertados
+		(type INSTANCE)
+;+		(allowed-classes)
+		(create-accessor read-write))
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Destino "Consta de un nombre(indica la ciudad) y varias características como si es internacional, si es de tipo montaña, etc."
+	(is-a Base)
+	(role concrete)
+	(single-slot pais
+;+		(comment "Indica el pais del destino")
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot inverse_of_destino
+		(type INSTANCE)
+;+		(allowed-classes Viaje Alojamiento Transporte)
+		(create-accessor read-write))
+	(single-slot region
+;+		(comment "Indica la region del destino")
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot caracteristicas
+;+		(comment "Características del destino, como ser de aventura, de fiesta, etc.")
+		(type STRING)
+		(create-accessor read-write))
+	(single-slot tipoGeografico
+;+		(comment "Indica el tipo geográfico del destino.\nPuede ser una isla, continente, una península, etc")
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Transporte
+	(is-a Base)
+	(role abstract)
+	(single-slot precio
+;+		(comment "Coste que tiene el servicio")
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot destino
+;+		(comment "Destino del viaje, en principio solo uno por viaje.")
+		(type INSTANCE)
+;+		(allowed-classes Destino)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tipoTransporte
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Avion
+	(is-a Transporte)
+	(role concrete)
+	(single-slot Vip
+;+		(comment "Indica si existe clase Business")
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+		(default FALSE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tipoTransporte
+		(type STRING)
+;+		(value "avión")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Tren
+	(is-a Transporte)
+	(role concrete)
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tipoTransporte
+		(type STRING)
+;+		(value "tren")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Coche
+	(is-a Transporte)
+	(role concrete)
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tipoTransporte
+		(type STRING)
+;+		(value "coche")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Crucero "El transporte es un crucero. Quiere decir que el viaje es un crucero. Puede implementarse de varias formas alternativas."
+	(is-a Transporte)
+	(role concrete)
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tipoTransporte
+		(type STRING)
+;+		(value "crucero")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Alojamiento
+	(is-a Base)
+	(role abstract)
+	(single-slot precio_por_dia
+;+		(comment "Precio por estancia de un día a pensión completa")
+		(type INTEGER)
+		(range 0 %3FVARIABLE)
+		(default 0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot destino
+;+		(comment "Destino del viaje, en principio solo uno por viaje.")
+		(type INSTANCE)
+;+		(allowed-classes Destino)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot estrellas
+		(type INTEGER)
+		(range 1 6)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tipoAlojamiento
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Hotel "Un hotel constarán"
+	(is-a Alojamiento)
+	(role concrete)
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tipoAlojamiento
+		(type STRING)
+;+		(value "hotel")
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot inverse_of_hoteles
+		(type INSTANCE)
+;+		(allowed-classes CadenasHoteleras)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Camping
+	(is-a Alojamiento)
+	(role concrete)
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot tipoAlojamiento
+		(type STRING)
+;+		(value "camping")
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Viaje "Un viaje consta de un destino, un transporte, un alojamiento, un precio y una duración."
+	(is-a Base)
+	(role concrete)
+	(single-slot precio
+;+		(comment "Coste que tiene el servicio")
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot alojamiento
+;+		(comment "Indica el alojamiento")
+		(type INSTANCE)
+;+		(allowed-classes Alojamiento)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot inverse_of_viajesOfertados
+		(type INSTANCE)
+;+		(allowed-classes Mayoristas)
+		(create-accessor read-write))
+	(single-slot transporte
+;+		(comment "Transporte para el viaje, en principio solo se permite uno.")
+		(type INSTANCE)
+;+		(allowed-classes Transporte)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot duracion
+;+		(comment "Duración del viaje en días")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot destino
+;+		(comment "Destino del viaje, en principio solo uno por viaje.")
+		(type INSTANCE)
+;+		(allowed-classes Destino)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot codigo
+;+		(comment "Ciertas instancias requieres ser identificadas de manera única por un código.")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write)))
+
+(defclass Usuario "Usuario de la aplicación"
+	(is-a Base)
+	(role concrete)
+	(single-slot nombre
+;+		(comment "Nombre de la instancia")
+		(type STRING)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot presupuesto
+		(type FLOAT)
+		(range 0.0 %3FVARIABLE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot edad
+;+		(comment "Edad del usuario.")
+		(type INTEGER)
+		(range 0 %3FVARIABLE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot intereses
+;+		(comment "Intereses del usuario")
+		(type STRING)
+		(create-accessor read-write))
+	(multislot viajes
+		(type INSTANCE)
+;+		(allowed-classes Viaje)
+		(create-accessor read-write)))

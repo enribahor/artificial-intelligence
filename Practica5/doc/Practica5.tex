@@ -1,0 +1,303 @@
+\documentclass[11pt, a4paper, spanish, openright, twoside]{book}
+\usepackage[spanish, activeacute]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage[top=2.5cm, bottom=2.5cm, outer=1.75cm, inner=1.75cm, heightrounded, marginparwidth=2.5cm, marginparsep=0.3cm]{geometry}	%márgenes empequeñecidos
+\usepackage[top=2.95cm, bottom=2.25cm, outer=2.75cm, inner=2.75cm, heightrounded, marginparwidth=2.5cm, marginparsep=0.3cm]{geometry}	%márgenes originalmente
+\usepackage{dpg}
+\usepackage{fli}
+
+\usepackage{pgf}
+\usepackage{tikz}
+
+\usepgflibrary{shapes.geometric} % LATEX and plain TEX and pure pgf
+\usetikzlibrary{arrows,automata,positioning}
+\tikzstyle{accepting by double}= [double distance=1.6pt,double,outer sep=.5\pgflinewidth+.8pt] % esto es algo estético.
+\renewcommand\shorthandsspanish{}  % para compatibilizar spanish con tikz
+
+%%%%%%		Figuras		%%%%%%%%%%%%%%%%%%%
+\usepackage[vflt]{floatflt}		%Entorno float-figure
+
+%%%%%%		Page style		%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thepage}{\arabic{page}}% Arabic page numbers\fancyhead{}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead[LO,RE]{Práctica 5}	%encabezado de pares: nombre de la sección
+\fancyhead[RO,LE]{Diseño de un agente de viajes}
+\fancyfoot[LE,RO]{\thepage}	%abajo a izqda en pares, derecha en impares: numero de pagina
+%\fancyhead[LE]{\nouppercase{\leftmark}} %cuadro izquierdo de pagina par: parte y contador
+\fancyfoot[CE]{Inteligencia Artificial} 
+\fancyfoot[CO]{Doble Grado Informática-Matemáticas - Universidad Complutense}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0.4pt}		% linea por debajo del encabezado
+\renewcommand{\sectionmark}[1]{\markright{\textbf{\thesection. #1}}}	%negrita
+\renewcommand{\labelitemi}{$\circ$} %Primer itemize con circunferencia vacia
+\renewcommand{\labelitemii}{$\cdot$} %Segundo itemize con punto pequeño \cdot
+\renewcommand*{\thesection}{\arabic{section}}	% Hace que no apareca el indice de capitulos y que comience en section
+
+%%%%%%		Others		%%%%%%%%%%%%%%%%%%%
+\setlength{\leftmarginii}{0em} %Segundo itemize sin sangria
+\setlength{\leftmarginiii}{1em} %Tercer itemize casi sin sangria
+\renewcommand{\labelitemiii}{ }
+\pagenumbering{roman}
+\addto{\captionsspanish}{\renewcommand*{\contentsname}{Índice}} %Cambia "Indice general" por "Indice"
+
+
+
+\begin{document} 
+\title{\Huge{\textsc{Inteligencia Artificial}} \\
+	\vspace{0.7cm}
+	 \textsc{\Large{Práctica 5}} \\
+	\vspace{1.5cm}
+	\includegraphics[scale=0.45]{viaje}}
+\author{\textsc{Grupo 3:}\\
+	Enrique Ballesteros Horcajo\\
+	Ignacio Iker Prado Rujas}
+\date{\Today}
+\maketitle
+
+\newpage
+\mbox{}
+\thispagestyle{empty}						% Hoja en blanco, sin numeros ni nada
+\newpage
+
+
+\tableofcontents 							%INDICE hipervinculado
+
+\newpage
+\mbox{}
+\thispagestyle{empty}						% Hoja en blanco, sin numeros ni nada
+\newpage
+
+\pagenumbering{arabic}						% Pone el contador de paginas a 1 y ahora en numeros normales
+
+\vspace{3cm}
+
+
+\newpage
+
+
+
+\begin{section}{Introducción: Diseño de un agente de viajes}
+
+	\textbf{Problema:} 
+	
+	\textit{El objetivo de esta práctica es diseñar un agente de viajes que mediante la aplicación de los sistemas de reglas recomiende paquetes de viaje adecuados a los gustos y preferencias de los 
+			clientes, tal y como haría un agente de viajes real.}
+	
+	\textit{Para ello debemos diseñar un prototipo que utilice el motor de inferencia de Jess y acotar el problema y el conocimiento necesario. Haremos un diseño realista, que podamos utilizar para implementar nuestro prototipo a partir de él. Por ello, 
+		puede parecer que queda algo muy simple, pero el objetivo es implementar todo lo que se escriba en el diseño.}
+	
+	\textit{Nuestro prototipo pedirá una serie de datos al cliente y a partir de esos datos le recomendará una serie de paquetes de viajes ordenados en función de la coincidencia con sus gustos. Cada paquete 
+		de viajes constará de un destino, un medio de transporte y un alojamiento.}
+
+	
+	\textit{Permitiremos el viaje en tren,  en avión, en autobús y en coche particular. No se podrán combinar los medios de transporte, por lo que a Canarias solo se podrá viajar a las ciudades con aeropuerto.}
+	
+	Si conseguimos implementar todo lo especificado a continuación, iremos ampliando el diseño de manera incremental.
+	
+	\begin{center}
+	\includegraphics{espiral}
+	\end{center}
+	
+\end{section}
+	\newpage
+	\begin{section}{Información sobre viajes disponibles y sus características}
+		La información sobre los viajes debe ser información que pueda obtenerse a partir de bases de datos. No necesariamente de manera directa, pero debe poderse inferir de manera objetiva 
+		a partir de datos que tengamos. La base de datos que vamos a utilizar será una propia creada a partir de los datos de \url{www.wikipedia.org}. 
+		
+		Tendremos solo destinos nacionales, restringidos a España, para centrarnos en ofrecer un turismo enfocado en satisfacer los deseos del cliente. Así, el coste del viaje pasa a un segundo plano.
+		
+		Los viajes saldrán todos desde Madrid.
+		
+		Sobre cada destino tendremos la siguiente información en nuestra base de datos:
+			\begin{itemize}
+				\item Nombre.
+				\item Número de habitantes.
+				\item Número de hoteles.
+				\item Precio medio de un hotel (por noche).
+				\item Número de albergues.
+				\item Precio medio de un albergue.
+				\item Número de campings.
+				\item Precio medio de camping: por noche
+				\item Número de monumentos oficiales.
+				\item Montaña.
+				\item Playa.
+				\item Número de parques de atracciones.
+				\item Número de discotecas.
+				\item Medios de transporte permitidos: coche, avión, autobús o tren.
+				\item Deporte que se pueden realizar: aventura, extremos, naturaleza.
+				\item Número de balnearios. 
+				\item Número de museos.
+				\item Número de óperas.
+				\item Número de restaurantes.
+				\item Accesible para discapacitados.
+				
+						
+			\end{itemize}
+			
+			\newpage
+			Además, a partir de esta información inferiremos utilizando las siguientes reglas el resto de campos que utilizaremos para
+			recomendar los viajes a nuestros clientes.
+			
+				\begin{itemize}
+					\item Destino de ocio: Número de parques de atracciones $>$ 2 o Número de centros comerciales $>$ 5.
+					\item Destino de cultura: Número de museos $>$ 5 o Número de teatros $>$ 5 o número de óperas $>$ 3.
+					\item Destino de aventura: Existen deportes de aventura o existe playa o existe montaña.
+					\item Destino extremos: Existen deportes extremos.
+					\item Destino de fiesta: Número discotecas $>$ 10.
+					\item Destino turístico: Número monumentos oficiales $>$ 10 o número de hoteles $>$ 100.
+					\item Destino relax: Número de balnearios $>$ 0.
+					\item Destino naturaleza: Existen deportes naturaleza o existe montaña.
+					\item Destino gastronomía: Número de restaurantes $>$ 30.
+					\item Fácil llegada: medio de transporte: avión, tren o autobús.
+					
+					
+				\end{itemize}
+		
+	\end{section}
+	
+	\newpage
+	\begin{section}{Información que es necesario obtener del usuario sobre sus necesidades, gustos y limitaciones (económicas, de tiempo, etc.).}
+		Necesitaremos tanta información como sea posible del usuario, pero debe ser información precisa y objetiva. No podemos pedir que se 
+		rellenen todos los campos. Habrá unos datos concretos sobre el cliente y unos datos variables sobre el viaje que desea consultar.
+		Los datos del cliente serán:
+		
+				\begin{itemize}
+					\item Nombre.
+					\item Edad.									
+				\end{itemize}
+		
+		Para cada viaje que quiera consultar deberá rellenar los siguientes campos obligatorios:
+		
+					\begin{itemize}
+					\item Nº de personas.
+					\item Nº de niños.
+					\item Intereses en el viaje: relax, turismo, aventura, aventura extrema, gastronomía, ocio, cultura, fiesta y naturaleza. Deberá marcarse uno al menos.	
+					
+				\end{itemize}
+		Además, se podrán rellenar los siguientes campos de manera opcional para recibir un servicio más personalizado.
+		
+				\begin{itemize}
+					\item Discapacidad.
+					\item Presupuesto por persona y día.	
+				
+				\end{itemize}
+		Una vez rellenados los datos obligatorios y los que haya querido opcionales, inferiremos nuevos datos que almacenaremos en nuestro cliente:
+		
+				\begin{itemize}
+					\item Intereses:
+						\begin{itemize}
+							\item Ocio si (Nº de niños $>$ 0)
+							\item Fiesta si (Existe interés aventura y es joven)
+							\item Cultura si (Existe interés turismo y es medio)
+							\item Gastronomía si (Existe interés turismo y es medio)
+							\item Fiesta si ( Existe interés en ocio y Nº de personas $>$ 1 y Nº niños $=$ 0)
+							\item Turismo si (Existe interes cultura)
+						\end{itemize}
+					\item Rango de edad: 
+						\begin{itemize}
+							\item Joven si Edad $<$ 30.
+							\item Medio si (Edad $>$ 29 y Edad $<$ 66).
+							\item Mayor si Edad $>$ 65 
+						\end{itemize}
+					\item Presupuesto:
+						\begin{itemize}
+							\item Bajo: Menor de 30€.
+							\item Medio: Entre 30€ y 50€.
+							\item Alto: Más de 50€.
+						\end{itemize}
+						
+				\end{itemize}
+			
+	\end{section}
+		\newpage
+		\begin{section}{Reglas de recomendación que pueden utilizarse.}
+			Las reglas de recomendación deben relacionar la información que tenemos sobre los viajes y sus características con la información que tenemos 
+			sobre el usuario.
+			
+			
+			Usaremos los datos sobre el cliente para recomendarle tanto un alojamiento como un destino. 
+			
+			Así, recomendaremos destinos de la siguiente forma:
+			
+				\begin{itemize}
+
+					\item Si existe interés en turismo y tiene edad media:
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad es destino turístico.
+						\end{itemize}
+					\item Si existe interés en aventura y tiene edad media:						
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad es destino de aventura.
+						\end{itemize}
+					\item Si existe interés en ocio y tiene edad joven y (Nº niños $=$ 0):
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad es destino de ocio o si ciudad es destino fiesta.
+						\end{itemize}
+					\item Si existe interés en ocio y tiene edad media o mayor:
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad es destino de ocio.
+						\end{itemize}
+					\item Si existe discapacidad:						
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad está adaptada para discapacitados.
+						\end{itemize}
+					\item Si existe interés en fiesta y edad media o mayor:
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad es destino de ocio.
+						\end{itemize}
+					\item Si existe interés en aventura extremay edad mayor:
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad es destino aventura.
+						\end{itemize}
+					\item Si existe interés en turismo:
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad es destino de turismo o destino de ocio.
+						\end{itemize}
+					\item Si existe interés en gastronomía:
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad es destino de gastronomia.
+						\end{itemize}
+					\item Si Nº personas $>$ 4:
+						\begin{itemize}
+							\item Ciudad $\rightarrow$  Si ciudad es destino de ocio.
+						\end{itemize}
+
+				\end{itemize}
+				
+			\newpage
+			A la hora de recomendar alojamiento, tendremos en cuenta el gasto diario por persona:
+				\begin{itemize}
+					\item Si gasto es bajo: Recomendamos camping.
+					\item Si gasto es medio: Recomendamos albergue.
+					\item Si gasto es alto: Recomendamos hotel.
+				\end{itemize}
+				
+			Para el transporte también recomendaremos en función de los gustos(siempre que la ciudad lo permita):
+				\begin{itemize}
+					\item Si aventura, aventura extrema, ocio o naturaleza: Recomendamos coche.
+					\item Si  turismo, fiesta o gastronomía y presupuesto bajo: Recomendamos autobús.
+					\item Si turismo, fiesta o gastronomía y presupuesto medio: Recomendamos tren.
+					\item Si relax: Recomendamos tren.
+					\item Si presupuesto alto: Recomendamos avión.
+				\end{itemize}
+				
+			
+	\end{section}
+
+	
+\begin{thebibliography}{9}
+
+\bibitem{aima}
+	Russell, S.; Norvig, P, \\
+	\emph{Artificial Intelligence, a modern aproach}.\\
+	New Jersey: Pearson, 2010.
+	
+\bibitem{clase}
+	Apuntes y transparencias de Inteligencia Artificial, \\
+	Doble Grado Matemáticas - Ing. Informática, U.C.M., 2014-2015.
+
+\end{thebibliography}
+
+
+\end{document}

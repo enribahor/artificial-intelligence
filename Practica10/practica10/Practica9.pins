@@ -1,0 +1,312 @@
+; Mon Apr 27 01:28:09 CEST 2015
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+([Jess+engine] of  %3AJESS-ENGINE
+)
+
+([Practica10_Class10] of  Avion
+
+	(destino [Practica9_Class50004])
+	(nombre "AvionBristol")
+	(precio 10)
+	(Vip TRUE))
+
+([Practica10_Class11] of  Coche
+
+	(destino [Practica9_Class50004])
+	(nombre "CocheBristol")
+	(precio 24))
+
+([Practica10_Class12] of  Coche
+
+	(destino [Practica9_Class20006])
+	(nombre "CocheCadiz")
+	(precio 19))
+
+([Practica10_Class13] of  Tren
+
+	(destino [Practica9_Class50004])
+	(nombre "TrenBristol")
+	(precio 11))
+
+([Practica10_Class14] of  Tren
+
+	(destino [Practica9_Class30004])
+	(nombre "TrenAlcafran")
+	(precio 12))
+
+([Practica10_Class15] of  Viaje
+
+	(alojamiento [Practica9_Class20001])
+	(codigo "CadizAvionHotel")
+	(destino [Practica9_Class20006])
+	(duracion 2)
+	(inverse_of_viajesOfertados [Practica9_Class0])
+	(precio 96)
+	(transporte [Practica10_Class9]))
+
+([Practica10_Class16] of  Viaje
+
+	(alojamiento [Practica10_Class6])
+	(codigo "CadizTrenCamping")
+	(destino [Practica9_Class20006])
+	(duracion 5)
+	(inverse_of_viajesOfertados [Practica9_Class30003])
+	(precio 67)
+	(transporte [Practica9_Class30010]))
+
+([Practica10_Class17] of  Viaje
+
+	(alojamiento [Practica9_Class20001])
+	(codigo "CadizCocheHotel")
+	(destino [Practica9_Class20006])
+	(duracion 6)
+	(inverse_of_viajesOfertados [Practica9_Class3])
+	(precio 271)
+	(transporte [Practica10_Class12]))
+
+([Practica10_Class18] of  Viaje
+
+	(alojamiento [Practica9_Class40001])
+	(codigo "BristolHotelAvion")
+	(destino [Practica9_Class50004])
+	(duracion 3)
+	(inverse_of_viajesOfertados [Practica9_Class2])
+	(precio 145)
+	(transporte [Practica10_Class10]))
+
+([Practica10_Class19] of  Viaje
+
+	(alojamiento [Practica10_Class7])
+	(codigo "BristolCocheCamping")
+	(destino [Practica9_Class50004])
+	(duracion 2)
+	(inverse_of_viajesOfertados [Practica9_Class30003])
+	(precio 56)
+	(transporte [Practica10_Class11]))
+
+([Practica10_Class20] of  Viaje
+
+	(alojamiento [Practica10_Class8])
+	(codigo "AlcafranCocheCamping")
+	(destino [Practica9_Class30004])
+	(duracion 4)
+	(inverse_of_viajesOfertados [Practica9_Class3])
+	(precio 64)
+	(transporte [Practica9_Class30008]))
+
+([Practica10_Class21] of  Viaje
+
+	(alojamiento [Practica10_Class8])
+	(codigo "AlcafranTrenCamping")
+	(destino [Practica9_Class30004])
+	(duracion 8)
+	(inverse_of_viajesOfertados [Practica9_Class2])
+	(precio 108)
+	(transporte [Practica10_Class14]))
+
+([Practica10_Class22] of  Viaje
+
+	(alojamiento [Practica9_Class8])
+	(codigo "AlcafranCocheHotel")
+	(destino [Practica9_Class30004])
+	(duracion 4)
+	(inverse_of_viajesOfertados [Practica9_Class0])
+	(precio 328)
+	(transporte [Practica9_Class30008]))
+
+([Practica10_Class3] of  Usuario
+
+	(edad 35)
+	(intereses
+		"fiesta"
+		"turismo")
+	(nombre "kike")
+	(presupuesto 320.0)
+	(viajes
+		[Practica10_Class22]
+		[Practica10_Class18]
+		[Practica10_Class21]
+		[Practica10_Class19]
+		[Practica10_Class20]))
+
+([Practica10_Class6] of  Camping
+
+	(destino [Practica9_Class20006])
+	(estrellas 5)
+	(nombre "CampingLujoCadiz")
+	(precio_por_dia 10))
+
+([Practica10_Class7] of  Camping
+
+	(destino [Practica9_Class50004])
+	(estrellas 3)
+	(nombre "CampingBaratoBristol")
+	(precio_por_dia 16))
+
+([Practica10_Class8] of  Camping
+
+	(destino [Practica9_Class30004])
+	(estrellas 2)
+	(nombre "CampingAlcafran")
+	(precio_por_dia 12))
+
+([Practica10_Class9] of  Avion
+
+	(destino [Practica9_Class20006])
+	(nombre "AvionCadiz")
+	(precio 12)
+	(Vip FALSE))
+
+([Practica9_Class0] of  Mayoristas
+
+	(descripci%C3%B3n "Te clavan un extra por lo de Pana y otro extra por lo de visión. Teniendo Viajes Marsans para qué quieres esto.")
+	(nombre "Panavisión")
+	(viajesOfertados
+		[Practica10_Class15]
+		[Practica10_Class22]))
+
+([Practica9_Class10001] of  %3APAL-CONSTRAINT
+
+	(%3APAL-NAME "AE001")
+	(%3APAL-STATEMENT "(Predicate)"))
+
+([Practica9_Class17] of  CadenasHoteleras
+
+	(descripci%C3%B3n "Empresa nacional hostelera NH")
+	(hoteles [Practica9_Class8])
+	(nombre "NH"))
+
+([Practica9_Class18] of  %3AINSTANCE-ANNOTATION
+
+	(%3ACREATION-TIMESTAMP "2015.03.13 18:26:21.971 GMT")
+	(%3ACREATOR "usuario_local"))
+
+([Practica9_Class2] of  Mayoristas
+
+	(descripci%C3%B3n "Nombre cutre donde los haya (igual que el nivel de la empresa).")
+	(nombre "Politours")
+	(viajesOfertados
+		[Practica10_Class18]
+		[Practica10_Class21]))
+
+([Practica9_Class20001] of  Hotel
+
+	(destino [Practica9_Class20006])
+	(estrellas 4)
+	(inverse_of_hoteles [Practica9_Class50009])
+	(nombre "AC Cádiz")
+	(precio_por_dia 42))
+
+([Practica9_Class20006] of  Destino
+
+	(caracteristicas "relax")
+	(inverse_of_destino
+		[Practica10_Class9]
+		[Practica10_Class12]
+		[Practica9_Class30010]
+		[Practica10_Class15]
+		[Practica10_Class16]
+		[Practica10_Class17]
+		[Practica10_Class6])
+	(nombre "Cádiz")
+	(pais "España")
+	(region "Andalucía")
+	(tipoGeografico "cabo"))
+
+([Practica9_Class3] of  Mayoristas
+
+	(descripci%C3%B3n "Los  de toda la vida.")
+	(nombre "ViajesMarsans")
+	(viajesOfertados
+		[Practica10_Class17]
+		[Practica10_Class20]))
+
+([Practica9_Class30003] of  Mayoristas
+
+	(descripci%C3%B3n "Mayorista, no vende pescado.")
+	(nombre "Travelplan")
+	(viajesOfertados
+		[Practica10_Class16]
+		[Practica10_Class19]))
+
+([Practica9_Class30004] of  Destino
+
+	(caracteristicas "turismo")
+	(inverse_of_destino
+		[Practica10_Class8]
+		[Practica9_Class30005]
+		[Practica9_Class30008]
+		[Practica10_Class14]
+		[Practica10_Class20]
+		[Practica10_Class21]
+		[Practica10_Class22]
+		[Practica9_Class8])
+	(nombre "Alcafran")
+	(pais "España")
+	(region "Desconocida")
+	(tipoGeografico "peninsula"))
+
+([Practica9_Class30005] of  Avion
+
+	(destino [Practica9_Class30004])
+	(nombre "AvionAlcafran")
+	(precio 15)
+	(Vip TRUE))
+
+([Practica9_Class30008] of  Coche
+
+	(destino [Practica9_Class30004])
+	(nombre "CocheAlcafrán")
+	(precio 16))
+
+([Practica9_Class30010] of  Tren
+
+	(destino [Practica9_Class20006])
+	(nombre "TrenCadiz")
+	(precio 17))
+
+([Practica9_Class40001] of  Hotel
+
+	(destino [Practica9_Class50004])
+	(estrellas 5)
+	(inverse_of_hoteles [Practica9_Class50008])
+	(nombre "Marriot")
+	(precio_por_dia 45))
+
+([Practica9_Class50004] of  Destino
+
+	(caracteristicas "fiesta")
+	(inverse_of_destino
+		[Practica10_Class7]
+		[Practica10_Class10]
+		[Practica10_Class11]
+		[Practica10_Class13]
+		[Practica10_Class18]
+		[Practica10_Class19])
+	(nombre "Bristol")
+	(pais "Reino Unido")
+	(region "Oeste")
+	(tipoGeografico "isla"))
+
+([Practica9_Class50008] of  CadenasHoteleras
+
+	(descripci%C3%B3n "Empresa internacional hostelera Marriot")
+	(hoteles [Practica9_Class40001])
+	(nombre "MarriotInternational"))
+
+([Practica9_Class50009] of  CadenasHoteleras
+
+	(descripci%C3%B3n "Empresa nacional hostelera AC")
+	(hoteles [Practica9_Class20001])
+	(nombre "AC"))
+
+([Practica9_Class8] of  Hotel
+
+	(destino [Practica9_Class30004])
+	(estrellas 4)
+	(inverse_of_hoteles [Practica9_Class17])
+	(nombre "NH Alcafrán")
+	(precio_por_dia 78))
